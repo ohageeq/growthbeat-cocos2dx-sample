@@ -62,7 +62,7 @@ void GrowthPush::requestDeviceToken(const std::string& senderId, GPEnvironment e
 
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "requestRegistrationId", "(Ljava/lang/String;I)V")) {
         jstring jSenderId = t.env->NewStringUTF(senderId.c_str());
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, jSenderId, environment);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, jSenderId, (int) environment);
         t.env->DeleteLocalRef(jSenderId);
         t.env->DeleteLocalRef(t.classID);
     }

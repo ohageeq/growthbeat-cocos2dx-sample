@@ -1,0 +1,15 @@
+# view AndroidManifest.xml #generated:56
+-keep class com.growthbeat.link.InstallReferrerReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.growthbeat.message.view.MessageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:46
+-keep class com.growthpush.BroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:40
+-keep class com.growthpush.view.AlertActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:25
+-keep class org.cocos2dx.cpp.AppActivity { <init>(...); }
+

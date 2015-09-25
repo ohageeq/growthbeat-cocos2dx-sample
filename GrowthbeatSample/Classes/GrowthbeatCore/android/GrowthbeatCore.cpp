@@ -27,21 +27,21 @@ static std::function<bool(std::map<std::string,std::string>)> s_selector = nullp
 
 extern "C"
 {
-    JNIEXPORT void JNICALL Java_com_growthbeat_growthbeatcore_JavaNativeListener_onHandled(JNIEnv* env, jobject thiz, jlong delegate, jstring jJson)
+    JNIEXPORT void JNICALL Java_com_growthbeat_intenthandler_JavaNativeListener_onHandled(JNIEnv* env, jobject thiz, jlong delegate, jstring jJson)
     {
         if (s_selector != nullptr) {
             std::string json = JniHelper::jstring2string(jJson);
             rapidjson::Document doc;
             
-            doc.Parse(json.c_str());
+            doc.Parse<0>(json.c_str());
             bool error = doc.HasParseError();
             if(error){
                 printf("parse error\n");
                 return;
             }
             std::map<std::string,std::string> extraMap;
-            for(rapidjson::Value::ConstMemberIterator itr = doc.MemberBegin();
-                itr != doc.MemberEnd(); itr++)
+            for(rapidjson::Value::ConstMemberIterator itr = doc.MemberonBegin();
+                itr != doc.MemberonEnd(); itr++)
             {
                 const char* name = itr->name.GetString();
                 const char* value = itr->value.GetString();
@@ -52,7 +52,7 @@ extern "C"
     }
 };
 
-static const char *const JavaClassName = "com/growthbeat/GrowthbeatCore/GrowthbeatCoreJNI";
+static const char *const JavaClassName = "com/growthbeat/intenthandler/IntentHandlerJNI";
 
 growthbeatcore::GrowthbeatCore::GrowthbeatCore() {};
 

@@ -134,6 +134,10 @@ static AppDelegate s_sharedApplication;
     [[GrowthPush sharedInstance] setDeviceToken:deviceToken];
 }
 
+- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"didFailToRegisterForRemoteNotification : %@", error);
+}
+
 
 #pragma mark -
 #pragma mark Memory management
