@@ -24,21 +24,21 @@ static const char *const JavaClassName = "com/growthbeat/analytics/GrowthAnalyti
 
 growthanalytics::GrowthAnalytics::GrowthAnalytics() {};
 
-void GrowthAnalytics::track(const std::string& eventId) {
+void GrowthAnalytics::track(const std::string& name) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "track", "(Ljava/lang/String;)V")) {
-		jstring jEventId = t.env->NewStringUTF(eventId.c_str());
-	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jEventId);
-	    t.env->DeleteLocalRef(jEventId);
+		jstring jName = t.env->NewStringUTF(name.c_str());
+	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jName);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(t.classID);
 	}
 }
-void GrowthAnalytics::track(const std::string& eventId, const std::map<std::string, std::string>& properties) {
+void GrowthAnalytics::track(const std::string& name, const std::map<std::string, std::string>& properties) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "track", "(Ljava/lang/String;Ljava/util/Map;)V")) {
-		jstring jEventId = t.env->NewStringUTF(eventId.c_str());
+		jstring jName = t.env->NewStringUTF(name.c_str());
 
 		jobject jProperties = 0;
 		jclass hashMapClass = t.env->FindClass("java/util/HashMap");
@@ -59,27 +59,27 @@ void GrowthAnalytics::track(const std::string& eventId, const std::map<std::stri
 			jProperties = hashMap;
 			t.env->DeleteLocalRef(hashMapClass);
 		}
-		t.env->CallStaticVoidMethod(t.classID, t.methodID, jEventId, jProperties);
-	    t.env->DeleteLocalRef(jEventId);
+		t.env->CallStaticVoidMethod(t.classID, t.methodID, jName, jProperties);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(jProperties);
 	    t.env->DeleteLocalRef(t.classID);
 	}
 }
-void GrowthAnalytics::track(const std::string& eventId, GATrackOption option) {
+void GrowthAnalytics::track(const std::string& name, GATrackOption option) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "track", "(Ljava/lang/String;I)V")) {
-		jstring jEventId = t.env->NewStringUTF(eventId.c_str());
-	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jEventId, option);
-	    t.env->DeleteLocalRef(jEventId);
+		jstring jName = t.env->NewStringUTF(name.c_str());
+	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jName, option);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(t.classID);
 	}
 }
-void GrowthAnalytics::track(const std::string& eventId, const std::map<std::string, std::string>& properties, GATrackOption option) {
+void GrowthAnalytics::track(const std::string& name, const std::map<std::string, std::string>& properties, GATrackOption option) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "track", "(Ljava/lang/String;Ljava/util/Map;I)V")) {
-		jstring jEventId = t.env->NewStringUTF(eventId.c_str());
+		jstring jName = t.env->NewStringUTF(name.c_str());
 
 		jobject jProperties = 0;
 		jclass hashMapClass = t.env->FindClass("java/util/HashMap");
@@ -100,34 +100,82 @@ void GrowthAnalytics::track(const std::string& eventId, const std::map<std::stri
 			jProperties = hashMap;
 			t.env->DeleteLocalRef(hashMapClass);
 		}
-		t.env->CallStaticVoidMethod(t.classID, t.methodID, jEventId, jProperties, option);
-	    t.env->DeleteLocalRef(jEventId);
+		t.env->CallStaticVoidMethod(t.classID, t.methodID, jName, jProperties, option);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(jProperties);
 	    t.env->DeleteLocalRef(t.classID);
 	}
 }
+void GrowthAnalytics::track(const std::string& _namespace,const std::string& name, const std::map<std::string, std::string>& properties, GATrackOption option) {
+    JniMethodInfo t;
+    
+    if (JniHelper::getStaticMethodInfo(t, JavaClassName, "track", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;I)V")) {
+        jstring jNamespace = t.env->NewStringUTF(_namespace.c_str());
+        jstring jName = t.env->NewStringUTF(name.c_str());
+        
+        jobject jProperties = 0;
+        jclass hashMapClass = t.env->FindClass("java/util/HashMap");
+        if(hashMapClass) {
+            jsize mapSize = properties.size();
+            jmethodID init = t.env->GetMethodID(hashMapClass, "<init>", "(I)V");
+            jobject hashMap = t.env->NewObject(hashMapClass, init, mapSize);
+            jmethodID putMethod = t.env->GetMethodID(hashMapClass, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+            
+            for(std::map<std::string, std::string>::const_iterator it = properties.begin();
+                it != properties.end(); ++it) {
+                jstring key = t.env->NewStringUTF(it->first.c_str());
+                jstring value = t.env->NewStringUTF(it->second.c_str());
+                t.env->CallObjectMethod(hashMap, putMethod, key, value);
+                t.env->DeleteLocalRef(key);
+                t.env->DeleteLocalRef(value);
+            }
+            jProperties = hashMap;
+            t.env->DeleteLocalRef(hashMapClass);
+        }
+        
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, jNamespace, jName, jProperties, option);
+        t.env->DeleteLocalRef(jNamespace);
+        t.env->DeleteLocalRef(jName);
+        t.env->DeleteLocalRef(jProperties);
+        t.env->DeleteLocalRef(t.classID);
+    }
+}
 
-void GrowthAnalytics::tag(const std::string& tagId) {
+void GrowthAnalytics::tag(const std::string& name) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "tag", "(Ljava/lang/String;)V")) {
-		jstring jTagId = t.env->NewStringUTF(tagId.c_str());
-	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jTagId);
-	    t.env->DeleteLocalRef(jTagId);
+		jstring jName = t.env->NewStringUTF(name.c_str());
+	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jName);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(t.classID);
 	}
 }
-void GrowthAnalytics::tag(const std::string& tagId, const std::string& value) {
+void GrowthAnalytics::tag(const std::string& name, const std::string& value) {
 	JniMethodInfo t;
 
 	if (JniHelper::getStaticMethodInfo(t, JavaClassName, "tag", "(Ljava/lang/String;Ljava/lang/String;)V")) {
-		jstring jTagId = t.env->NewStringUTF(tagId.c_str());
+		jstring jName = t.env->NewStringUTF(name.c_str());
 		jstring jValue = t.env->NewStringUTF(value.c_str());
-	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jTagId, jValue);
-	    t.env->DeleteLocalRef(jTagId);
+	    t.env->CallStaticVoidMethod(t.classID, t.methodID, jName, jValue);
+	    t.env->DeleteLocalRef(jName);
 	    t.env->DeleteLocalRef(jValue);
 	    t.env->DeleteLocalRef(t.classID);
 	}
+}
+void GrowthAnalytics::tag(const std::string& _namespace,const std::string& name, const std::string& value) {
+    JniMethodInfo t;
+    
+    if (JniHelper::getStaticMethodInfo(t, JavaClassName, "tag", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")) {
+        jstring jNamespace = t.env->NewStringUTF(_namespace.c_str());
+        jstring jName = t.env->NewStringUTF(name.c_str());
+        jstring jValue = t.env->NewStringUTF(value.c_str());
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, jNamespace, jName, jValue);
+        t.env->DeleteLocalRef(jNamespace);
+        t.env->DeleteLocalRef(jName);
+        t.env->DeleteLocalRef(jValue);
+        t.env->DeleteLocalRef(t.classID);
+    }
 }
 
 void GrowthAnalytics::open(void) {

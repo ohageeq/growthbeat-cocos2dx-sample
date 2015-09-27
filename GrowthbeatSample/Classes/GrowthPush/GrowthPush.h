@@ -18,8 +18,8 @@ NS_GROWTHPUSH_BEGIN
 /* APNS/GCM did receive callback function */
 // FIXME: for C++11
 // typedef std::function<void(cocos2d::Value)> gpDidReceiveRemoteNotificationCallback;
-#define gp_remote_notification_selector(_SELECTOR) (GPRemoteNotificationCallFunc)(&_SELECTOR)
-typedef void (cocos2d::CCApplication::*GPRemoteNotificationCallFunc)(cocos2d::Value);
+#define gp_remote_notification_selector(_SELECTOR) (GPRemoteNotificationCallback)(&_SELECTOR)
+typedef void (cocos2d::Application::*GPRemoteNotificationCallback)(cocos2d::Value);
 
 class CC_DLL GrowthPush
 {
@@ -89,7 +89,7 @@ void clearBadge(void);
  */
 // FIXME: for C++11
 // void setOpenNotificationCallback(const gpDidReceiveRemoteNotificationCallback &callback);
-void setOpenNotificationCallback(cocos2d::Application *target, GPRemoteNotificationCallFunc selector);
+void setOpenNotificationCallback(cocos2d::Application *target, GPRemoteNotificationCallback selector);
 
 private:
  static GrowthPush* instance;

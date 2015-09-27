@@ -22,17 +22,17 @@ void growthanalytics::GrowthAnalytics::initialize(const std::string& application
                                               credentialId:[NSString stringWithUTF8String:credentialId.c_str()]];
 }
 
-void growthanalytics::GrowthAnalytics::track(const std::string &eventId) {
-    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:eventId.c_str()]];
+void growthanalytics::GrowthAnalytics::track(const std::string &name) {
+    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:name.c_str()]];
 }
-void growthanalytics::GrowthAnalytics::track(const std::string &eventId, growthanalytics::GATrackOption option) {
-    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:eventId.c_str()]
+void growthanalytics::GrowthAnalytics::track(const std::string &name, growthanalytics::GATrackOption option) {
+    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:name.c_str()]
                               option:option];
 }
-void growthanalytics::GrowthAnalytics::track(const std::string &eventId, const std::map<std::string, std::string>& properties) {
-    growthanalytics::GrowthAnalytics::track(eventId, properties, GATrackOptionDefault);
+void growthanalytics::GrowthAnalytics::track(const std::string &name, const std::map<std::string, std::string>& properties) {
+    growthanalytics::GrowthAnalytics::track(name, properties, GATrackOptionDefault);
 }
-void growthanalytics::GrowthAnalytics::track(const std::string &eventId, const std::map<std::string, std::string>& properties, GATrackOption option) {
+void growthanalytics::GrowthAnalytics::track(const std::string &name, const std::map<std::string, std::string>& properties, GATrackOption option) {
     
     NSMutableDictionary* dict = [[NSMutableDictionary dictionary] init];
     
@@ -42,16 +42,34 @@ void growthanalytics::GrowthAnalytics::track(const std::string &eventId, const s
                  forKey:[NSString stringWithUTF8String:((*iter).second).c_str()]];
         
     }
-    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:eventId.c_str()]
+    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:name.c_str()]
+                          properties:dict
+                              option:option];
+}
+void growthanalytics::GrowthAnalytics::track(const std::string &_namespace,const std::string &name, const std::map<std::string, std::string>& properties, GATrackOption option) {
+    
+    NSMutableDictionary* dict = [[NSMutableDictionary dictionary] init];
+    
+    for( std::map< std::string, std::string >::const_iterator iter = properties.begin(); iter != properties.end(); iter++ ) {
+        
+        [dict setObject:[NSString stringWithUTF8String:((*iter).first).c_str()]
+                 forKey:[NSString stringWithUTF8String:((*iter).second).c_str()]];
+        
+    }
+    [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:_namespace.c_str()] name:[NSString stringWithUTF8String:name.c_str()]
                           properties:dict
                               option:option];
 }
 
-void growthanalytics::GrowthAnalytics::tag(const std::string &tagId) {
-    [GrowthAnalyticsCCInternal tag:[NSString stringWithUTF8String:tagId.c_str()]];
+void growthanalytics::GrowthAnalytics::tag(const std::string &name) {
+    [GrowthAnalyticsCCInternal tag:[NSString stringWithUTF8String:name.c_str()]];
 }
-void growthanalytics::GrowthAnalytics::tag(const std::string &tagId, const std::string &value) {
-    [GrowthAnalyticsCCInternal tag:[NSString stringWithUTF8String:tagId.c_str()]
+void growthanalytics::GrowthAnalytics::tag(const std::string &name, const std::string &value) {
+    [GrowthAnalyticsCCInternal tag:[NSString stringWithUTF8String:name.c_str()]
+                             value:[NSString stringWithUTF8String:value.c_str()]];
+}
+void growthanalytics::GrowthAnalytics::tag(const std::string &_namespace,const std::string &name, const std::string &value) {
+    [GrowthAnalyticsCCInternal tag:[NSString stringWithUTF8String:_namespace.c_str()] name:[NSString stringWithUTF8String:name.c_str()]
                              value:[NSString stringWithUTF8String:value.c_str()]];
 }
 

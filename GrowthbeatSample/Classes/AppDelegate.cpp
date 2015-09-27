@@ -80,10 +80,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
         log("cutomintenthandler called.");
         return true;
     });
-//    GrowthLink::getInstance()->initialize("PIaD6TaVt7wvKwao", "FD2w93wXcWlb68ILOObsKz5P3af9oVMo");
+    GrowthLink::getInstance()->initialize("PIaD6TaVt7wvKwao", "FD2w93wXcWlb68ILOObsKz5P3af9oVMo");
     GrowthPush::getInstance()->requestDeviceToken("1000565500410", kGPEnvironment);
+    GrowthPush::getInstance()->setOpenNotificationCallback(this, gp_remote_notification_selector(AppDelegate::didReceiveRemoteNotification));
     Growthbeat::getInstance()->start();
 
+    GrowthAnalytics::getInstance()->purchase(100, "category", "product");
+    GrowthAnalytics::getInstance()->setGender(GAGenderMale);
+    
+    GrowthAnalytics::getInstance()->track("Full", "CustomEvent", {{"prop","val"}}, GATrackOptionDefault);
+    GrowthAnalytics::getInstance()->tag("Full", "CustomTag");
     
     return true;
 }
@@ -107,4 +113,8 @@ void AppDelegate::applicationWillEnterForeground() {
     
     
     Growthbeat::getInstance()->start();
+}
+
+void AppDelegate::didReceiveRemoteNotification(cocos2d::Value extra) {
+    CCLOG("%s", extra.getDescription().c_str());
 }

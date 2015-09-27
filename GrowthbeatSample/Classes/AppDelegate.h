@@ -34,6 +34,8 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
+    
+    virtual void didReceiveRemoteNotification(cocos2d::Value extra);
 };
 
 #endif // _APP_DELEGATE_H_

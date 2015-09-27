@@ -17,13 +17,15 @@
 /* GrowthAnalytics SDK interface */
 + (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
-+ (void)track:(NSString *)eventId;
-+ (void)track:(NSString *)eventId properties:(NSDictionary *)properties;
-+ (void)track:(NSString *)eventId option:(int)option;
-+ (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(int)option;
++ (void)track:(NSString *)name;
++ (void)track:(NSString *)name properties:(NSDictionary *)properties;
++ (void)track:(NSString *)name option:(int)option;
++ (void)track:(NSString *)name properties:(NSDictionary *)properties option:(int)option;
++ (void)track:(NSString *)_namespace name:(NSString *)name properties:(NSDictionary *)properties option:(int)option;
 
-+ (void)tag:(NSString *)tagId;
-+ (void)tag:(NSString *)tagId value:(NSString *)value;
++ (void)tag:(NSString *)name;
++ (void)tag:(NSString *)name value:(NSString *)value;
++ (void)tag:(NSString *)_namespace name:(NSString *)name value:(NSString *)value;
 
 + (void)open;
 + (void)close;

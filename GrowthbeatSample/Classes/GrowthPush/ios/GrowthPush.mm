@@ -60,7 +60,7 @@ void growthpush::GrowthPush::clearBadge(void) {
 // FIXME: for C++11
 // void growthpush::GrowthPush::setOpenNotificationCallback(const growthpush::gpDidReceiveRemoteNotificationCallback
 // &callback)
-void growthpush::GrowthPush::setOpenNotificationCallback(Application *target, growthpush::GPRemoteNotificationCallFunc selector) {
+void growthpush::GrowthPush::setOpenNotificationCallback(Application *target, growthpush::GPRemoteNotificationCallback selector) {
 
     CCAssert(target, "target should not be NULL");
     CCAssert(selector, "selector should not be NULL");

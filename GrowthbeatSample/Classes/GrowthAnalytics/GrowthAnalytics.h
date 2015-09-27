@@ -25,13 +25,15 @@ public:
     static GrowthAnalytics* getInstance();
     void initialize(const std::string& applicationId, const std::string& credentialId);
 
-    void track(const std::string& eventId);
-    void track(const std::string& eventId, const std::map<std::string, std::string>& properties);
-    void track(const std::string& eventId, GATrackOption option);
-    void track(const std::string& eventId, const std::map<std::string, std::string>& properties, GATrackOption option);
+    void track(const std::string& name);
+    void track(const std::string& name, const std::map<std::string, std::string>& properties);
+    void track(const std::string& name, GATrackOption option);
+    void track(const std::string& name, const std::map<std::string, std::string>& properties, GATrackOption option);
+    void track(const std::string& _namespace,const std::string& name, const std::map<std::string, std::string>& properties, GATrackOption option);
 
-    void tag(const std::string& tagId);
-    void tag(const std::string& tagId, const std::string& value);
+    void tag(const std::string& name);
+    void tag(const std::string& name, const std::string& value);
+    void tag(const std::string& _namespace,const std::string& name, const std::string& value);
 
     void open(void);
     void close(void);

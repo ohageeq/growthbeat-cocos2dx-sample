@@ -3,8 +3,6 @@ package com.growthbeat.link;
 import android.content.Context;
 import android.net.Uri;
 
-import com.growthbeat.link.GrowthLink;
-
 public class GrowthLinkJNI {
 
 	private static Context context = null;

@@ -44,7 +44,7 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <receiver
-            android:name="com.growthpush.BroadcastReceiver"
+            android:name="com.growthpush.Cocos2dxBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />

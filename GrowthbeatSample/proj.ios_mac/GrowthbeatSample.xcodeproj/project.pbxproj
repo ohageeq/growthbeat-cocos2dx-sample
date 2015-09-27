@@ -43,6 +43,9 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		C11188FD1BB7D0620015663B /* GPAppDelegateIntercepter.m in Sources */ = {isa = PBXBuildFile; fileRef = C11188FA1BB7D0620015663B /* GPAppDelegateIntercepter.m */; settings = {ASSET_TAGS = (); }; };
+		C16A9AF71BB7D60F0071EFDE /* GPAppDelegateWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C16A9AF61BB7D60F0071EFDE /* GPAppDelegateWrapper.m */; settings = {ASSET_TAGS = (); }; };
+		C16A9AFA1BB7D6BF0071EFDE /* UIApplication+GrowthPush.m in Sources */ = {isa = PBXBuildFile; fileRef = C16A9AF91BB7D6BF0071EFDE /* UIApplication+GrowthPush.m */; settings = {ASSET_TAGS = (); }; };
 		C1F940D61BB51A500010F664 /* Growthbeat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F940D41BB51A500010F664 /* Growthbeat.framework */; };
 		C1F940D71BB51A500010F664 /* GrowthLink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F940D51BB51A500010F664 /* GrowthLink.framework */; };
 		C1F940D91BB51A560010F664 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F940D81BB51A560010F664 /* libiconv.2.4.0.tbd */; };
@@ -156,6 +159,13 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C11188F91BB7D0620015663B /* GPAppDelegateIntercepter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateIntercepter.h; sourceTree = "<group>"; };
+		C11188FA1BB7D0620015663B /* GPAppDelegateIntercepter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPAppDelegateIntercepter.m; sourceTree = "<group>"; };
+		C11188FB1BB7D0620015663B /* GPAppDelegateWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateWrapper.h; sourceTree = "<group>"; };
+		C16A9AF51BB7D58F0071EFDE /* GPAppDelegateWrapperDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateWrapperDelegate.h; sourceTree = "<group>"; };
+		C16A9AF61BB7D60F0071EFDE /* GPAppDelegateWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPAppDelegateWrapper.m; sourceTree = "<group>"; };
+		C16A9AF81BB7D6BF0071EFDE /* UIApplication+GrowthPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+GrowthPush.h"; sourceTree = "<group>"; };
+		C16A9AF91BB7D6BF0071EFDE /* UIApplication+GrowthPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+GrowthPush.m"; sourceTree = "<group>"; };
 		C1F940D41BB51A500010F664 /* Growthbeat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growthbeat.framework; sourceTree = "<group>"; };
 		C1F940D51BB51A500010F664 /* GrowthLink.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GrowthLink.framework; sourceTree = "<group>"; };
 		C1F940D81BB51A560010F664 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libiconv.2.4.0.tbd; sourceTree = DEVELOPER_DIR; };
@@ -547,9 +557,16 @@
 		C1F941181BB51ABF0010F664 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				C11188F91BB7D0620015663B /* GPAppDelegateIntercepter.h */,
+				C11188FA1BB7D0620015663B /* GPAppDelegateIntercepter.m */,
+				C11188FB1BB7D0620015663B /* GPAppDelegateWrapper.h */,
+				C16A9AF61BB7D60F0071EFDE /* GPAppDelegateWrapper.m */,
+				C16A9AF51BB7D58F0071EFDE /* GPAppDelegateWrapperDelegate.h */,
 				C1F941191BB51ABF0010F664 /* GrowthPush.mm */,
 				C1F9411A1BB51ABF0010F664 /* GrowthPushCCInternal.h */,
 				C1F9411B1BB51ABF0010F664 /* GrowthPushCCInternal.m */,
+				C16A9AF81BB7D6BF0071EFDE /* UIApplication+GrowthPush.h */,
+				C16A9AF91BB7D6BF0071EFDE /* UIApplication+GrowthPush.m */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -670,9 +687,11 @@
 			files = (
 				C1F9411F1BB51ABF0010F664 /* GrowthAnalyticsCCInternal.m in Sources */,
 				C1F9412A1BB51ABF0010F664 /* GrowthLinkInstance.cpp in Sources */,
+				C16A9AF71BB7D60F0071EFDE /* GPAppDelegateWrapper.m in Sources */,
 				C1F9412E1BB51ABF0010F664 /* GrowthPush.cpp in Sources */,
 				C1F9412F1BB51ABF0010F664 /* GrowthPushInstance.cpp in Sources */,
 				C1F9411D1BB51ABF0010F664 /* GrowthAnalyticsInstance.cpp in Sources */,
+				C11188FD1BB7D0620015663B /* GPAppDelegateIntercepter.m in Sources */,
 				C1F9412C1BB51ABF0010F664 /* GrowthLinkCCinternal.m in Sources */,
 				C1F941201BB51ABF0010F664 /* Growthbeat.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
@@ -683,6 +702,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				C1F9412B1BB51ABF0010F664 /* GrowthLink.mm in Sources */,
 				C1F941261BB51ABF0010F664 /* GBCustomIntent.c in Sources */,
+				C16A9AFA1BB7D6BF0071EFDE /* UIApplication+GrowthPush.m in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				C1F941281BB51ABF0010F664 /* GrowthbeatCoreCCInternal.m in Sources */,
 				C1F941291BB51ABF0010F664 /* GrowthLink.cpp in Sources */,

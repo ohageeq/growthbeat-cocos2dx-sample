@@ -7,6 +7,6 @@ public class Cocos2dxBroadcastReceiver extends ExternalFrameworkBroadcastReceive
 	public Cocos2dxBroadcastReceiver() {
 		super();
 		this.bridge = new Cocos2dxBridge();
-
 	}
+
 }

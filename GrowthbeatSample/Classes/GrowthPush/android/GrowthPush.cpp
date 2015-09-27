@@ -28,10 +28,10 @@ static const char *const JavaClassName = "com/growthpush/GrowthPushJNI";
 // FIXME: for C++11
 // static gpDidReceiveRemoteNotificationCallback s_callback = nullptr;
 static cocos2d::Application *s_target = nullptr;
-static GPRemoteNotificationCallFunc s_selector = nullptr;
+static GPRemoteNotificationCallback s_selector = nullptr;
 
 extern "C" {
-JNIEXPORT void JNICALL Java_com_growthpush_cocos2dx_Cocos2dxBridge_didOpenRemoteNotification(JNIEnv *env, jobject thiz, jstring jJson) {
+JNIEXPORT void JNICALL Java_com_growthpush_Cocos2dxBridge_didOpenRemoteNotification(JNIEnv *env, jobject thiz, jstring jJson) {
     // FIXME: for C++11
 
     /*
@@ -131,7 +131,7 @@ void GrowthPush::clearBadge(void) {
 
 // FIXME: for C++11
 // void GrowthPush::setOpenNotificationCallback(const gpDidReceiveRemoteNotificationCallback &callback)
-void GrowthPush::setOpenNotificationCallback(Application *target, GPRemoteNotificationCallFunc selector) {
+void GrowthPush::setOpenNotificationCallback(Application *target, GPRemoteNotificationCallback selector) {
     // s_callback = callback;
     CCAssert(target, "target should not be NULL");
     CCAssert(selector, "selector should not be NULL");

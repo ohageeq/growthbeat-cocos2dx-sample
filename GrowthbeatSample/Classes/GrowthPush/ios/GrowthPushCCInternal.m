@@ -108,7 +108,7 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
         return;
     }
 
-    NSString *json = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+    NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     if (json) {
         s_didReceiveRemoteNotificationBlock(json);
     }

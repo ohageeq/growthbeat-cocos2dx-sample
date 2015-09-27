@@ -18,29 +18,39 @@
                                                      credentialId:credentialId];
 }
 
-+ (void)track:(NSString *)eventId {
-    [[GrowthAnalytics sharedInstance] track:eventId];
++ (void)track:(NSString *)name {
+    [[GrowthAnalytics sharedInstance] track:name];
 }
-+ (void)track:(NSString *)eventId properties:(NSDictionary *)properties {
-    [[GrowthAnalytics sharedInstance] track:eventId
++ (void)track:(NSString *)name properties:(NSDictionary *)properties {
+    [[GrowthAnalytics sharedInstance] track:name
                                  properties:properties];
 }
-+ (void)track:(NSString *)eventId option:(int)option {
-    [[GrowthAnalytics sharedInstance] track:eventId
++ (void)track:(NSString *)name option:(int)option {
+    [[GrowthAnalytics sharedInstance] track:name
                                      option:[self convertIntToGATrackOption:option]];
 }
-+ (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(int)option {
-    [[GrowthAnalytics sharedInstance] track:eventId
++ (void)track:(NSString *)name properties:(NSDictionary *)properties option:(int)option {
+    [[GrowthAnalytics sharedInstance] track:name
                                  properties:properties
                                      option:[self convertIntToGATrackOption:option]];
 }
-
-+ (void)tag:(NSString *)tagId {
-    [[GrowthAnalytics sharedInstance] tag:tagId];
++ (void)track:(NSString *)_namespace name:(NSString *)name properties:(NSDictionary *)properties option:(int)option {
+    [[GrowthAnalytics sharedInstance] track:_namespace
+                                       name:name
+                                 properties:properties
+                                     option:[self convertIntToGATrackOption:option]
+                                 completion:nil];
 }
-+ (void)tag:(NSString *)tagId value:(NSString *)value {
-    [[GrowthAnalytics sharedInstance] tag:tagId
+
++ (void)tag:(NSString *)name {
+    [[GrowthAnalytics sharedInstance] tag:name];
+}
++ (void)tag:(NSString *)name value:(NSString *)value {
+    [[GrowthAnalytics sharedInstance] tag:name
                                     value:value];
+}
++ (void)tag:(NSString *)_namespace name:(NSString *)name value:(NSString *)value {
+    [[GrowthAnalytics sharedInstance] tag:_namespace name:name value:value completion:nil];
 }
 
 + (void)open {

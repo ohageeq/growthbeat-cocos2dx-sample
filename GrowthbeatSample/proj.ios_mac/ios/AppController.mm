@@ -130,13 +130,13 @@ static AppDelegate s_sharedApplication;
      */
 }
 
-- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [[GrowthPush sharedInstance] setDeviceToken:deviceToken];
-}
-
-- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"didFailToRegisterForRemoteNotification : %@", error);
-}
+//- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    [[GrowthPush sharedInstance] setDeviceToken:deviceToken];
+//}
+//
+//- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+//    NSLog(@"didFailToRegisterForRemoteNotification : %@", error);
+//}
 
 
 #pragma mark -

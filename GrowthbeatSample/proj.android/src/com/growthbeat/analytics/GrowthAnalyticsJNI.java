@@ -17,28 +17,36 @@ import com.growthbeat.http.GrowthbeatHttpClient;
 
 public class GrowthAnalyticsJNI {
 
-	public static void track(final String eventId) {
-		GrowthAnalytics.getInstance().track(eventId, null, null);
+	public static void track(final String name) {
+		GrowthAnalytics.getInstance().track(name, null, null);
 	}
 
-	public static void track(final String eventId, final Map<String, String> properties) {
-		GrowthAnalytics.getInstance().track(eventId, properties);
+	public static void track(final String name, final Map<String, String> properties) {
+		GrowthAnalytics.getInstance().track(name, properties);
 	}
 
-	public static void track(final String eventId, final int option) {
-		GrowthAnalytics.getInstance().track(eventId, convertIntToTrackOption(option));
+	public static void track(final String name, final int option) {
+		GrowthAnalytics.getInstance().track(name, convertIntToTrackOption(option));
 	}
 
-	public static void track(final String eventId, final Map<String, String> properties, final int option) {
-		GrowthAnalytics.getInstance().track(eventId, properties, convertIntToTrackOption(option));
+	public static void track(final String name, final Map<String, String> properties, final int option) {
+		GrowthAnalytics.getInstance().track(name, properties, convertIntToTrackOption(option));
 	}
 
-	public static void tag(final String tagId) {
-		GrowthAnalytics.getInstance().tag(tagId, null);
+	public static void track(final String namespace, final String name, final Map<String, String> properties, final int option) {
+		GrowthAnalytics.getInstance().track(namespace, name, properties, convertIntToTrackOption(option));
 	}
 
-	public static void tag(final String tagId, final String value) {
-		GrowthAnalytics.getInstance().tag(tagId, value);
+	public static void tag(final String name) {
+		GrowthAnalytics.getInstance().tag(name, null);
+	}
+
+	public static void tag(final String name, final String value) {
+		GrowthAnalytics.getInstance().tag(name, value);
+	}
+
+	public static void tag(final String namespace, final String name, final String value) {
+		GrowthAnalytics.getInstance().tag(namespace, name, value);
 	}
 
 	public static void open() {
