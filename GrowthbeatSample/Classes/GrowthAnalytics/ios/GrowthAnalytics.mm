@@ -38,8 +38,8 @@ void growthanalytics::GrowthAnalytics::track(const std::string &name, const std:
     
     for( std::map< std::string, std::string >::const_iterator iter = properties.begin(); iter != properties.end(); iter++ ) {
     
-        [dict setObject:[NSString stringWithUTF8String:((*iter).first).c_str()]
-                 forKey:[NSString stringWithUTF8String:((*iter).second).c_str()]];
+        [dict setObject:[NSString stringWithUTF8String:((*iter).second).c_str()]
+                 forKey:[NSString stringWithUTF8String:((*iter).first).c_str()]];
         
     }
     [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:name.c_str()]
@@ -52,8 +52,8 @@ void growthanalytics::GrowthAnalytics::track(const std::string &_namespace,const
     
     for( std::map< std::string, std::string >::const_iterator iter = properties.begin(); iter != properties.end(); iter++ ) {
         
-        [dict setObject:[NSString stringWithUTF8String:((*iter).first).c_str()]
-                 forKey:[NSString stringWithUTF8String:((*iter).second).c_str()]];
+        [dict setObject:[NSString stringWithUTF8String:((*iter).second).c_str()]
+                 forKey:[NSString stringWithUTF8String:((*iter).first).c_str()]];
         
     }
     [GrowthAnalyticsCCInternal track:[NSString stringWithUTF8String:_namespace.c_str()] name:[NSString stringWithUTF8String:name.c_str()]

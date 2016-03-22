@@ -27,7 +27,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import <Growthbeat/GrowthPush.h>
+#import <GrowthLink/GrowthLink.h>
 
 @implementation AppController
 
@@ -130,14 +130,30 @@ static AppDelegate s_sharedApplication;
      */
 }
 
-//- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    [[GrowthPush sharedInstance] setDeviceToken:deviceToken];
-//}
-//
-//- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-//    NSLog(@"didFailToRegisterForRemoteNotification : %@", error);
-//}
+- (BOOL) application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        NSURL *webpageURL = userActivity.webpageURL;
+        if ( [self handleUniversalLink:webpageURL]){
+            [[GrowthLink sharedInstance] handleOpenUrl:webpageURL];
+        } else {
+            // 例：コンテンツをアプリで開けない時にSafariにリダイレクトする場合
+            [[UIApplication sharedApplication] openURL:webpageURL];
+            return false;
+        }
+        
+    }
+    return true;
+}
 
+- (BOOL) handleUniversalLink:(NSURL*) url{
+    NSURLComponents *component = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:true];
+    if (!component || !component.host) return false;
+    if ([@"gbt.io" isEqualToString:component.host] ) {
+        
+        return true;
+    }
+    return false;
+}
 
 #pragma mark -
 #pragma mark Memory management
